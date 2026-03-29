@@ -1,16 +1,36 @@
-# React + Vite
+The goal was Create a Dashboard Component that simulates a real-time data environment. I keep the architecture modular and reusable.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Approach i took :
+1. Separating Logic from UI
+First, I decided to isolate the data-fetching logic into a custom hook:
+useAutoFetch
 
-Currently, two official plugins are available:
+This helped me:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Keep the UI components clean
+Reuse fetching logic easily
+Manage state (loading, error, data, timer) in one place.
 
-## React Compiler
+2. Designing Auto-Sync Mechanism
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+I implemented:
 
-## Expanding the ESLint configuration
+setInterval for periodic fetch
+A timer-based auto-fetch system
+A countdown mechanism (secondsLeft)
+A manual refresh option
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+3. I break ui into different components like Dashboard, Countdownbar, statusindicator,Data indicator.
+
+4. I focused on handling all possible states properly:
+
+Loading → spinner + disabled refresh
+Error → retry button + error banner
+Sync info → last updated time + sync count.
+
+5. I handled:
+
+Interval setup inside useEffect
+Cleanup using clearInterval 
+
+this is to prevent memory leaks.
