@@ -1,0 +1,36 @@
+The goal was Create a Dashboard Component that simulates a real-time data environment. I keep the architecture modular and reusable.
+
+Approach i took :
+1. Separating Logic from UI
+First, I decided to isolate the data-fetching logic into a custom hook:
+useAutoFetch
+
+This helped me:
+
+Keep the UI components clean
+Reuse fetching logic easily
+Manage state (loading, error, data, timer) in one place.
+
+2. Designing Auto-Sync Mechanism
+
+I implemented:
+
+setInterval for periodic fetch
+A timer-based auto-fetch system
+A countdown mechanism (secondsLeft)
+A manual refresh option
+
+3. I break ui into different components like Dashboard, Countdownbar, statusindicator,Data indicator.
+
+4. I focused on handling all possible states properly:
+
+Loading → spinner + disabled refresh
+Error → retry button + error banner
+Sync info → last updated time + sync count.
+
+5. I handled:
+
+Interval setup inside useEffect
+Cleanup using clearInterval 
+
+this is to prevent memory leaks.
